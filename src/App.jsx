@@ -3,14 +3,13 @@ import Loader from "./components/Loader";
 import SearchBar from "./components/SearchBar";
 import WeatherCard from "./components/WeatherCard";
 
-// 🌤 Replace with your own OpenWeatherMap API key
 const API_KEY = "bff7e33b95e7b761bf3d40644744f12a";
 
 function App() {
-  const [weatherData, setWeatherData] = useState(null); // Current weather info
-  const [isLoading, setIsLoading] = useState(false); // Loading state
-  const [errorMessage, setErrorMessage] = useState(""); // Error message
-  const [recentCities, setRecentCities] = useState([]); // Search history
+  const [weatherData, setWeatherData] = useState(null); 
+  const [isLoading, setIsLoading] = useState(false); 
+  const [errorMessage, setErrorMessage] = useState(""); 
+  const [recentCities, setRecentCities] = useState([]); 
 
   // 🔄 Fetch weather info for a city
   const getWeather = async (city) => {
@@ -27,7 +26,7 @@ function App() {
       const data = await res.json();
       setWeatherData(data);
 
-      // Update recent searches (keep last 5)
+      
       setRecentCities((prev) => {
         const updated = [city, ...prev.filter(c => c.toLowerCase() !== city.toLowerCase())];
         return updated.slice(0, 5);
@@ -42,19 +41,15 @@ function App() {
   return (
     <div className="min-h-screen bg-blue-100 text-gray-900 p-6 transition-colors duration-300">
       <div className="max-w-xl mx-auto">
-        {/* 🌦 Centered Header */}
         <div className="mb-6">
           <h1 className="text-4xl font-bold text-center text-blue-800">🌦 Weather Dashboard</h1>
         </div>
 
-        {/* City Search */}
         <SearchBar onSearch={getWeather} />
 
-        {/* Status Messages */}
         {isLoading && <Loader />}
         {errorMessage && <p className="text-center text-red-500">{errorMessage}</p>}
 
-        {/* Weather Info Card */}
         {weatherData && (
           <>
             <WeatherCard weather={weatherData} />
@@ -69,7 +64,6 @@ function App() {
           </>
         )}
 
-        {/* Recent Search Buttons */}
         {recentCities.length > 0 && (
           <div className="mt-6 text-center">
             <h3 className="font-semibold mb-2">Recent Searches</h3>

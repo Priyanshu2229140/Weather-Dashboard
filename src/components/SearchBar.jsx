@@ -7,7 +7,7 @@ const SearchBar = ({ onSearch }) => {
     e.preventDefault();
     if (cityInput.trim()) {
       onSearch(cityInput);
-      setCityInput(""); // clear input after search
+      setCityInput(""); 
     }
   };
 
