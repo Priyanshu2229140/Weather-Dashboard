@@ -1,33 +1,31 @@
 import { useState } from "react";
+import { FiSearch } from "react-icons/fi";
 
 const SearchBar = ({ onSearch }) => {
-  const [cityInput, setCityInput] = useState("");
+  const [city, setCity] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (cityInput.trim()) {
-      onSearch(cityInput);
-      setCityInput(""); 
+    if (city.trim()) {
+      onSearch(city.trim());
+      setCity("");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex justify-center gap-2 mb-6">
+    <form
+      onSubmit={handleSubmit}
+      className="flex items-center justify-between bg-[#0a2540] border border-blue-500 rounded-full px-4 py-2 w-full shadow-md focus-within:ring-2 focus-within:ring-blue-400 focus-within:shadow-blue-500/40 transition-all duration-300"
+    >
       <input
         type="text"
-        value={cityInput}
-        onChange={(e) => setCityInput(e.target.value)}
-        placeholder="Enter city"
-        className="border border-gray-300 p-2 rounded w-64 shadow
-                   bg-white text-black placeholder-gray-500
-                   dark:bg-gray-800 dark:text-white dark:placeholder-gray-400
-                   focus:outline-none focus:ring-2 focus:ring-blue-400"
+        value={city}
+        onChange={(e) => setCity(e.target.value)}
+        placeholder="Search"
+        className="bg-transparent outline-none w-full text-white placeholder:text-blue-200 placeholder:tracking-widest"
       />
-      <button
-        type="submit"
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-      >
-        Search
+      <button type="submit" className="text-white hover:scale-110 transition">
+        <FiSearch size={18} />
       </button>
     </form>
   );
